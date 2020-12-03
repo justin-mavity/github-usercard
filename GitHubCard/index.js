@@ -1,18 +1,18 @@
 import axios from "axios";
 const url = "https://api.github.com/users/";
 axios
-    .get("https://api.github.com/users/justin-mavity")
-    .then((res) => {
-        const user = res.data
-        console.log(user);
-        const newCard = cardMaker({
-            user: user
-        });
-        document.querySelector(".cards").append(newCard);
-    })
-    .catch((err) => {
-        console.log(err);
+  .get("https://api.github.com/users/justin-mavity")
+  .then((res) => {
+    const user = res.data;
+    console.log(user);
+    const newCard = cardMaker({
+      user: user,
     });
+    document.querySelector(".cards").append(newCard);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 /*
 
       STEP 1: using axios, send a GET request to the following URL
@@ -47,20 +47,20 @@ axios
 const followersArray = ["tetondan", "dustinmyers", "luishrd", "bigknell"];
 
 followersArray.forEach((elem) => {
-    axios.get(url + elem)
-        .then(res => {
-            const user = res.data
-            console.log(user);
-            const newCard = cardMaker({
-                user: user
-            });
-            document.querySelector(".cards").append(newCard);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-
-})
+  axios
+    .get(url + elem)
+    .then((res) => {
+      const user = res.data;
+      console.log(user);
+      const newCard = cardMaker({
+        user: user,
+      });
+      document.querySelector(".cards").append(newCard);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -82,51 +82,49 @@ followersArray.forEach((elem) => {
     </div>
 */
 
-function cardMaker({
-    user
-}) {
-    const card = document.createElement("div"),
-        image = document.createElement("img"),
-        cardInfo = document.createElement("div"),
-        name = document.createElement("h3"),
-        username = document.createElement("p"),
-        location = document.createElement("p"),
-        profile = document.createElement("p"),
-        userAddress = document.createElement("a"),
-        followers = document.createElement("followers"),
-        following = document.createElement("following"),
-        bio = document.createElement("p");
+function cardMaker({ user }) {
+  const card = document.createElement("div"),
+    image = document.createElement("img"),
+    cardInfo = document.createElement("div"),
+    name = document.createElement("h3"),
+    username = document.createElement("p"),
+    location = document.createElement("p"),
+    profile = document.createElement("p"),
+    userAddress = document.createElement("a"),
+    followers = document.createElement("followers"),
+    following = document.createElement("following"),
+    bio = document.createElement("p");
 
-    card.classList.add("card");
-    image.src = user.avatar_url;
-    cardInfo.classList.add("card-info");
-    name.classList.add("name");
-    username.classList.add("username");
-    userAddress.href = user.html_url;
+  card.classList.add("card");
+  image.src = user.avatar_url;
+  cardInfo.classList.add("card-info");
+  name.classList.add("name");
+  username.classList.add("username");
+  userAddress.href = user.html_url;
 
-    name.textContent = user.name;
-    username.textContent = user.login;
-    location.textContent = "Location: " + user.location;
-    profile.textContent = userAddress;
-    followers.textContent = 'Followers: ' + user.followers;
-    following.textContent = 'Following: ' + user.following;
-    bio.textContent = 'Bio: ' + user.bio;
+  name.textContent = user.name;
+  username.textContent = user.login;
+  location.textContent = "Location: " + user.location;
+  profile.textContent = userAddress;
+  followers.textContent = "Followers: " + user.followers;
+  following.textContent = "Following: " + user.following;
+  bio.textContent = "Bio: " + user.bio;
 
-    card.appendChild(image);
-    card.appendChild(cardInfo);
-    cardInfo.appendChild(name);
-    cardInfo.appendChild(username);
-    cardInfo.appendChild(location);
-    cardInfo.appendChild(profile);
-    cardInfo.appendChild(followers);
-    cardInfo.appendChild(following);
-    cardInfo.appendChild(bio);
-    profile.appendChild(userAddress);
+  card.appendChild(image);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+  profile.appendChild(userAddress);
 
-    userAddress.addEventListener("click", () => {
-        console.log(card);
-    });
-    return card;
+  userAddress.addEventListener("click", () => {
+    console.log(card);
+  });
+  return card;
 }
 
 /*
